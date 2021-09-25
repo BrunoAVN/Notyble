@@ -1,0 +1,3 @@
+iro.min.js - https://iro.js.org/
+
+svg-pen-sketch.js [.map] - https://github.com/Desousak/svg-pen-sketch
