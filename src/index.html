@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Notyble</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.18/dist/js/uikit-icons.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <!-- COLOR PICKER -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+    <link rel="stylesheet" href="index.css">
+    <script defer src="sketch.js"></script>
+    <script defer src="drag.js" type="text/javascript"></script>
+    <link rel="icon" href="src/Icons/16.png">
+  </head>
+
+  <body class="uk-dark">
+  <div id="container">
+    <div id='side' class="uk-dark uk-background-secondary">
+      <ul>
+        <li>
+          <div class="uk-inline">
+          <button class="uk-button " type="button">Change color</button>
+          <div uk-dropdown="mode: click">
+            <div class="uk-card uk-card-body uk-card-default" style="box-shadow: none; padding: 0">
+              <button class="uk-dropdown-close" uk-close></button>
+            <div id="picker" onclick="colorChange()"></div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <p></p>
+
+        <li><button class="uk-button uk-button-primary">Upload</button></li>
+      </ul>
+      <div id="dragbar" class="uk-divider-vertical"></div>
+    </div>
+      <div id="main">
+      <svg class="sketch">
+      </svg>
+    </div>
+    </div>
+  <script src="../dist/svg-pen-sketch.js"></script>
+  </body>
+</html>
