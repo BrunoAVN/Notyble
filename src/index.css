@@ -13,9 +13,9 @@ body {
 }
 svg {
 
-    background-image: url(./background/grid.svg);
-    width: 100%;
+    /* background-image: url(./background/grid.svg); */
     height: 100%;
+    width: 100%;  
 }
 svg text {
     -webkit-user-select: none;
@@ -30,6 +30,9 @@ svg text {
     height: 100%;
 }
 
+.sketch{
+  background-image: url(./background/grid.svg);
+}
 #side{
     width: 230px;
     position: relative;
