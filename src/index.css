@@ -1,0 +1,50 @@
+html, body{
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+}
+
+ul{
+  list-style-type: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+svg {
+
+    background-image: url(./background/grid.svg);
+    width: 100%;
+    height: 100%;
+}
+svg text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.5s ease-in-out;
+}
+
+#container{
+    display:flex;
+    height: 100%;
+}
+
+#side{
+    width: 230px;
+    position: relative;
+}
+#main{
+    height: 100%;
+    z-index: 1;
+    flex-grow: 1;
+}
+#dragbar{
+  opacity: 0%;
+  width: 20px;
+  height:100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: col-resize;
+}
