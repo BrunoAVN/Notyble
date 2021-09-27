@@ -1,7 +1,8 @@
 let svgSketch = SvgPenSketch.default;
+var strokeWidth = document.getElementById("strokeWidth");
 
 // Prep the svg element to be drawn on (custom path styles can be passed in optionally)
-var strokeStyle =  {"stroke": "black", "stroke-width": "10px"};
+var strokeStyle =  {"stroke": "black", "strokeWidth": strokeWidth.value.toString+"px"};
 const canvas = new svgSketch(document.querySelector(".sketch"), strokeStyle);
 canvas.eraserParam.eraserMode = 'pixel'
 
@@ -32,3 +33,8 @@ function eraserMode(){
       canvas.eraserParam.eraserMode = 'pixel'
     }
 }
+
+strokeWidth.addEventListener("change", (event) =>{
+  console.log(strokeWidth.value);
+  canvas.strokeStyles['stroke-width'] = strokeWidth.value.toString() + 'px'
+})

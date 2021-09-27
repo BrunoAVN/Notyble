@@ -15,7 +15,7 @@ svg {
 
     /* background-image: url(./background/grid.svg); */
     height: 100%;
-    width: 100%;  
+    width: 100%;
 }
 svg text {
     -webkit-user-select: none;
