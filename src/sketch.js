@@ -17,7 +17,9 @@ var colorPicker = new iro.ColorPicker('#picker', {width:200});
 
 function colorChange(){
     var color = colorPicker.color.hexString;
-    canvas.strokeStyles.stroke = color;
+    // canvas.strokeStyles.stroke = color;
+    // lc.colors.primary = color
+
 };
 
 var eraserCb = document.getElementById("eraserMode");
@@ -34,6 +36,7 @@ eraserCb.addEventListener("click", (event) =>{
 })
 
 strokeWidth.addEventListener("change", (event) =>{
-  console.log(strokeWidth.value);
-  canvas.strokeStyles['stroke-width'] = strokeWidth.value.toString() + 'px'
+  alert('change');
+  var value = parseInt(strokeWidth.value);
+  lc.tool.strokeWidth = value;
 })

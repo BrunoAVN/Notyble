@@ -5,7 +5,7 @@ $('#dragbar').mousedown(function(e){
   dragging = true;
   var side = $('#side');
   $(document).mousemove(function(ex){
-    side.css("width", ex.pageX +2);
+    side.css("width", ex.pageX+2);
   });
 });
 

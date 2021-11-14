@@ -19,7 +19,22 @@
     <link rel="stylesheet" href="index.css">
     <script defer src="sketch.js"></script>
     <script defer src="drag.js" type="text/javascript"></script>
+    <script defer src="tools.js" type="text/javascript"></script>
+
     <link rel="icon" href="src/Icons/16.png">
+    <!-- LITERALLY CANVAS -->
+    <!-- stylesheet -->
+    <link href="../node_modules/literallycanvas/lib/css/literallycanvas.css" rel="stylesheet">
+
+    <!-- dependency: React.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+
+    <!-- Literally Canvas -->
+    <script src="../node_modules/literallycanvas/lib/js/literallycanvas-core.js"></script>
+    <!-- Pyodie -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+
   </head>
 
   <body class="uk-dark">
@@ -29,12 +44,12 @@
           <li>
             <!-- Pencil configs -->
             <div class="uk-inline">
-              <button class="uk-button " type="button">
+              <button id="pencil-button" class="uk-button" type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                   <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                 </svg>
               </button>
-              <div uk-dropdown="mode: hover; delay-show:200; delay-hide: 10">
+              <div uk-dropdown="mode: hover; delay-show:200; delay-hide: 100">
               <button class="uk-dropdown-close" uk-close></button>
               <ul class="uk-nav uk-dropdown-nav">
                 <li>
@@ -53,36 +68,75 @@
           <li>
             <!--  Eraser configs -->
             <div class="uk-inline">
-              <button class="uk-button" type="button">
+              <button id="eraser-button" class="uk-button" type="button" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16">
                   <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
                 </svg>
               </button>
 
-              <div uk-dropdown = "mode: hover; delay-show:200; delay-hide: 10">
-                <div class="uk-card uk-card-body uk-card-default" style="box-shadow: none; padding: 0">
-                  <button class="uk-dropdown-close" uk-close></button>
-                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                  <label for="objectMode"><input type="checkbox" class="uk-checkbox"  id = "eraserMode">  Object Mode</label>
-                </div>
-                </div>
+              <div uk-dropdown = "mode: hover; delay-show:200; delay-hide: 100">
+              <div class="uk-card uk-card-body uk-card-default" style="box-shadow: none; padding: 0">
+                <button class="uk-dropdown-close" uk-close></button>
+                <ul class="uk-nav uk-dropdown-nav">
+                  <li>
+                    <input type="range" min="2" max="20" value="5" id="strokeWidth">
+                  </li>
+                  <li>
+
+                    <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                      <label for="objectMode"><input type="checkbox" class="uk-checkbox"  id = "eraserMode">  Object Mode</label>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </li>
           <p></p>
           <li>
-            <!-- Upload button -->
-            <button class="uk-button" type="button">Upload</button>
+            <!-- Python button -->
+            <div class="uk-inline">
+
+              <button class="uk-button" type="button">
+                <!-- <img src="./Icons/python.svg" class="bi" style="width:16px; height:16px"> -->
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 48 48" style=" fill:currentColor;">
+                  <path d="M 24 3 C 20.271429 3 18.240267 3.9470561 16.792969 4.5742188 L 16.791016 4.5742188 C 15.488673 5.1421213 14.704771 6.3187748 14.365234 7.4296875 C 14.025697 8.5406002 14 9.6506515 14 10.640625 L 14 14 L 10.640625 14 C 9.6506515 14 8.5406002 14.0257 7.4296875 14.365234 C 6.3187748 14.704771 5.1421212 15.488626 4.5742188 16.791016 L 4.5742188 16.792969 C 3.947056 18.24022 3 20.271429 3 24 C 3 27.728571 3.9470561 29.759733 4.5742188 31.207031 L 4.5742188 31.208984 C 5.1421212 32.511374 6.3187748 33.295229 7.4296875 33.634766 C 8.5406002 33.974256 9.6506515 34 10.640625 34 L 14 34 L 14 37.359375 C 14 38.349349 14.0257 39.459401 14.365234 40.570312 C 14.704771 41.681225 15.488626 42.857879 16.791016 43.425781 L 16.792969 43.425781 C 18.24022 44.052944 20.271429 45 24 45 C 27.728571 45 29.759733 44.052944 31.207031 43.425781 L 31.208984 43.425781 C 32.511374 42.857879 33.295229 41.681225 33.634766 40.570312 C 33.974256 39.459401 34 38.349349 34 37.359375 L 34 34 L 37.359375 34 C 38.349349 34 39.459401 33.9743 40.570312 33.634766 C 41.681225 33.295229 42.857879 32.511374 43.425781 31.208984 L 43.425781 31.207031 C 44.052944 29.75978 45 27.728571 45 24 C 45 20.271429 44.052944 18.240267 43.425781 16.792969 L 43.425781 16.791016 C 42.857879 15.488673 41.681225 14.704771 40.570312 14.365234 C 39.459401 14.025697 38.349349 14 37.359375 14 L 34 14 L 34 10.640625 C 34 9.6506515 33.974303 8.5406002 33.634766 7.4296875 C 33.295229 6.3187748 32.511374 5.1421213 31.208984 4.5742188 L 31.207031 4.5742188 C 29.75978 3.9470561 27.728571 3 24 3 z M 24 6 C 27.268623 6 28.459017 6.6519922 30.009766 7.3242188 C 30.427376 7.5063161 30.590162 7.7325533 30.765625 8.3066406 C 30.941088 8.8807279 31 9.7405985 31 10.640625 L 31 15.253906 A 1.50015 1.50015 0 0 0 31 15.740234 L 31 19 C 31 20.950062 29.450062 22.5 27.5 22.5 L 20.5 22.5 C 16.928062 22.5 14 25.428062 14 29 L 14 31 L 10.640625 31 C 9.7405985 31 8.8807279 30.941088 8.3066406 30.765625 C 7.7325533 30.590162 7.5063162 30.427376 7.3242188 30.009766 C 6.6519921 28.459017 6 27.268623 6 24 C 6 20.731377 6.6519921 19.540983 7.3242188 17.990234 C 7.5063161 17.572624 7.7325533 17.409838 8.3066406 17.234375 C 8.8807279 17.058912 9.7405985 17 10.640625 17 L 23.5 17 A 1.50015 1.50015 0 1 0 23.5 14 L 17 14 L 17 10.640625 C 17 9.7405985 17.058912 8.8807279 17.234375 8.3066406 C 17.409838 7.7325533 17.572624 7.5063162 17.990234 7.3242188 C 19.540983 6.6519921 20.731377 6 24 6 z M 20.5 9 A 1.5 1.5 0 0 0 20.5 12 A 1.5 1.5 0 0 0 20.5 9 z M 34 17 L 37.359375 17 C 38.259401 17 39.119272 17.05891 39.693359 17.234375 C 40.267447 17.409838 40.493684 17.572624 40.675781 17.990234 C 41.348008 19.540983 42 20.731377 42 24 C 42 27.268623 41.348008 28.459017 40.675781 30.009766 C 40.493684 30.427376 40.267447 30.590162 39.693359 30.765625 C 39.119272 30.941088 38.259401 31 37.359375 31 L 24.5 31 A 1.50015 1.50015 0 1 0 24.5 34 L 31 34 L 31 37.359375 C 31 38.259401 30.94109 39.119272 30.765625 39.693359 C 30.590162 40.267447 30.427376 40.493684 30.009766 40.675781 C 28.459017 41.348008 27.268623 42 24 42 C 20.731377 42 19.540983 41.348008 17.990234 40.675781 C 17.572624 40.493684 17.409838 40.267447 17.234375 39.693359 C 17.058912 39.119272 17 38.259401 17 37.359375 L 17 29 C 17 27.049938 18.549938 25.5 20.5 25.5 L 27.5 25.5 C 31.071938 25.5 34 22.571938 34 19 L 34 17 z M 27.5 36 A 1.5 1.5 0 0 0 27.5 39 A 1.5 1.5 0 0 0 27.5 36 z">
+                  </path>
+                </svg>
+              </button>
+              <div uk-dropdown = "mode: click; delay-show:200; delay-hide: 100">
+              <div class="uk-card uk-card-body uk-card-default" style="box-shadow: none; padding: 0">
+                <button class="uk-dropdown-close" uk-close></button>
+                <form>
+                  <textarea class="uk-textarea" rows="10" cols="10" name="Python code here"></textarea>
+                </form>
+              </div>
+            </div>
+            </div>
           </li>
           <p></p>
 
         </ul>
-        <div id="dragbar" class="uk-divider-vertical"></div>
+        <div id="dragbar" class="uk-divider-vertical">
+        <button type="button" id='retract'><svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+        </button>
+        </div>
       </div>
+      <!-- Main Pane -->
       <div id="main">
-        <svg class="sketch" id="sketch"></svg>
+          <div class="my-drawing"></div>
       </div>
+      <script>
+        var lc = LC.init(
+        document.getElementsByClassName('my-drawing')[0],
+        {imageURLPrefix: '../node_modules/literallycanvas/lib/img',
+        }
+       );
+       lc.backgroundCanvas.style.backgroundColor = 'white';
+      </script>
+
     </div>
-    <script src="../dist/svg-pen-sketch.js"></script>
+
   </body>
 </html>

@@ -8,6 +8,10 @@ ul{
   list-style-type: none;
 }
 
+li {
+  float: left;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -25,6 +29,14 @@ svg text {
     transition: all 0.5s ease-in-out;
 }
 
+button{
+    /* position: relative; */
+    max-width: 100%;
+    float: none;
+    display: block;
+    /* background-color : rgb(255, 0, 0); */
+}
+
 #container{
     display:flex;
     height: 100%;
@@ -36,10 +48,11 @@ svg text {
 #side{
     width: 230px;
     position: relative;
+    min-width: 18ex;
 }
 #main{
     height: 100%;
-    z-index: 1;
+    z-index: 100;
     flex-grow: 1;
 }
 #dragbar{
@@ -50,4 +63,17 @@ svg text {
   top: 0;
   right: 0;
   cursor: col-resize;
+}
+
+.uk-button{
+  padding: 0 10px;
+}
+.my-drawing{
+  width: 100%;
+  height: 100%;
+}
+
+.retract{
+  position: absolute;
+  top: inherit;
 }
