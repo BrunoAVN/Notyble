@@ -54,6 +54,7 @@ button{
     height: 100%;
     z-index: 100;
     flex-grow: 1;
+    cursor: url('teste.svg') 10 10, auto;
 }
 #dragbar{
   opacity: 0%;
